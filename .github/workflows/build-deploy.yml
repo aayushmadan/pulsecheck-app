@@ -1,0 +1,45 @@
+name: Build & Deploy
+
+on:
+    workflow_dispatch: 
+    # push:
+    #     branches: [main]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        env:
+            DATABASE_URL: ${{ secrets.DATABASE_URL }}
+            PORT: ${{ vars.PORT }}
+            REQUEST_TIMEOUT_MS: ${{ vars.REQUEST_TIMEOUT_MS }}
+            CHECK_RETENTION_PER_MONITOR: ${{ vars.CHECK_RETENTION_PER_MONITOR }}
+    
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
+            
+            - name: Setup
+              uses: hashicorp/setup-terraform@v3
+        
+            - name: Launch AWS Infrastructure
+              run: |
+                terraform init
+                terraform validate
+                terraform plan
+                terraform apply -auto-approve
+              working-directory: ./terraform
+            
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                
+            
+            - name: Login to ECR
+              id: login-ecr
+              uses: aws-actions/amazon-ecr-login@v2
+        
+            - name: Build & Push to ECR
+              env: 
+                FRONTEND_URI=${{  }}
+

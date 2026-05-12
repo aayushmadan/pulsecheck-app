@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PulseCheck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <div>
+            <p class="eyebrow">PulseCheck</p>
+            <h1>Service health console</h1>
+          </div>
+        </div>
+        <div class="system-chip">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <span>Live monitor</span>
+        </div>
+      </header>
+
+      <section class="command-center">
+        <div class="command-copy">
+          <p class="eyebrow">Operations</p>
+          <h2>Track the endpoints that keep your product breathing.</h2>
+          <p class="lede">A focused workspace for uptime, latency, incident history, and monitor control.</p>
+        </div>
+        <form id="monitor-form" class="monitor-form glass-card">
+          <div class="form-title">
+            <span class="form-icon" aria-hidden="true">+</span>
+            <strong>New monitor</strong>
+          </div>
+          <div class="field-grid">
+            <label>
+              <span>Endpoint URL</span>
+              <input id="url" name="url" type="url" placeholder="https://api.example.com" required>
+            </label>
+            <label>
+              <span>Interval, minutes</span>
+              <input id="interval" name="interval" type="number" min="1" max="1440" value="1" required>
+            </label>
+          </div>
+          <button type="submit">Add monitor</button>
+        </form>
+      </section>
+
+      <section class="metrics-grid" aria-label="Fleet metrics">
+        <article>
+          <span>Total monitors</span>
+          <strong id="metric-total">0</strong>
+        </article>
+        <article>
+          <span>Active</span>
+          <strong id="metric-active">0</strong>
+        </article>
+        <article>
+          <span>Average uptime</span>
+          <strong id="metric-uptime">--</strong>
+        </article>
+        <article>
+          <span>Average latency</span>
+          <strong id="metric-latency">--</strong>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <div class="panel monitors-panel glass-card">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Fleet</p>
+              <h2>Monitors</h2>
+            </div>
+            <button id="refresh-button" class="ghost-button" type="button">Refresh</button>
+          </div>
+          <div id="monitor-list" class="monitor-list"></div>
+        </div>
+
+        <div class="panel details-panel glass-card">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Telemetry</p>
+              <h2 id="details-title">Select a monitor</h2>
+            </div>
+            <span id="details-status" class="status-pill muted">Idle</span>
+          </div>
+          <canvas id="latency-chart" height="220"></canvas>
+          <div id="log-list" class="log-list"></div>
+        </div>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

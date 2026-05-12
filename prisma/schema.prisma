@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Monitor {
+  id        Int      @id @default(autoincrement())
+  url       String
+  interval  Int      @default(1)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  checks    Check[]
+
+  @@index([isActive])
+  @@index([createdAt])
+}
+
+model Check {
+  id           Int         @id @default(autoincrement())
+  monitorId    Int
+  status       CheckStatus
+  statusCode   Int?
+  responseTime Int
+  createdAt    DateTime    @default(now())
+  monitor      Monitor     @relation(fields: [monitorId], references: [id], onDelete: Cascade)
+
+  @@index([monitorId, createdAt])
+  @@index([status])
+}
+
+enum CheckStatus {
+  UP
+  DOWN
+}

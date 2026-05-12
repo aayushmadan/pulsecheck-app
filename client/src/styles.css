@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply min-h-screen overflow-x-hidden bg-slate-100 font-sans text-slate-900 antialiased dark:bg-[#07111f] dark:text-slate-100;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply border border-white/70 bg-white/65 shadow-soft backdrop-blur-2xl dark:border-white/10 dark:bg-white/[0.06] dark:shadow-soft;
+  }
+
+  .glass-panel-strong {
+    @apply border border-white/75 bg-white/75 shadow-soft backdrop-blur-2xl dark:border-white/[0.11] dark:bg-white/[0.075] dark:shadow-soft;
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus:ring-4 focus:ring-cyan-500/20;
+  }
+
+  .soft-grid {
+    background-image:
+      linear-gradient(rgba(15, 23, 42, 0.026) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 23, 42, 0.026) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .dark .soft-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  }
+}
