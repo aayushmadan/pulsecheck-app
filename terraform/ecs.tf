@@ -52,7 +52,7 @@ resource "aws_ecs_task_definition" "frontend" {
   ])
 }
 
-resource "aws_ecs_service" "backend_service" {
+resource "aws_ecs_service" "backend-service" {
   name = "backend-service"
   cluster = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.backend.arn
@@ -60,7 +60,7 @@ resource "aws_ecs_service" "backend_service" {
   launch_type = "FARGATE"
 }
 
-resource "aws_ecs_service" "frontend_service" {
+resource "aws_ecs_service" "frontend-service" {
   name = "frontend_service"
   cluster = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.frontend.arn
