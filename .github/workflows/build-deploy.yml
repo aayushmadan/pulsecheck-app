@@ -31,7 +31,7 @@ jobs:
         
             - name: Launch AWS Infrastructure
               run: |
-                terraform init
+                terraform init -reconfigure
                 terraform validate
                 terraform plan
                 terraform apply -auto-approve
