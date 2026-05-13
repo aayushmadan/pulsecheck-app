@@ -8,7 +8,7 @@ resource "aws_ecr_repository" "backend-ecr" {
     }
 
     encryption_configuration {
-      encryption_type = "AES-256"
+      encryption_type = "AES256"
     }
 
     tags = {
@@ -26,7 +26,7 @@ resource "aws_ecr_repository" "frontend-ecr" {
     }
 
     encryption_configuration {
-      encryption_type = "AES-256"
+      encryption_type = "AES256"
     }
 
     tags = {
